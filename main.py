@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
-from models import User
+from models import User, UserAge
 
 app = FastAPI()
 
@@ -14,3 +14,13 @@ async def read_index():
 async def get_user():
     user = User(name="Азамат Дудаев", id=5985)
     return user
+
+# Задание 1.5
+@app.post("/user")
+async def check_adult(user: UserAge):
+    is_adult = user.age >= 18
+    return {
+        "name": user.name,
+        "age": user.age,
+        "is_adult": is_adult
+    }

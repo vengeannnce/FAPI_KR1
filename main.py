@@ -4,7 +4,6 @@ from models import User, UserAge, Feedback
 
 app = FastAPI()
 
-
 feedbacks = []
 
 # Задание 1.2
@@ -28,9 +27,9 @@ async def check_adult(user: UserAge):
         "is_adult": is_adult
     }
 
-# Задание 2.1
+# Задание 2.2
 @app.post("/feedback")
 async def submit_feedback(feedback: Feedback):
     feedbacks.append(feedback)
     
-    return {"message": f"Feedback received. Thank you, {feedback.name}."}
+    return {"message": f"Спасибо, {feedback.name}! Ваш отзыв сохранён."}

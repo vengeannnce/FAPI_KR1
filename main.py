@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
-from models import User, UserAge
+from models import User, UserAge, Feedback
 
 app = FastAPI()
+
+
+feedbacks = []
 
 # Задание 1.2
 @app.get("/")
@@ -12,7 +15,7 @@ async def read_index():
 # Задание 1.4
 @app.get("/users")
 async def get_user():
-    user = User(name="Азамат Дудаев", id=5985)
+    user = User(name="Ваше Имя и Фамилия", id=1)
     return user
 
 # Задание 1.5
@@ -24,3 +27,10 @@ async def check_adult(user: UserAge):
         "age": user.age,
         "is_adult": is_adult
     }
+
+# Задание 2.1
+@app.post("/feedback")
+async def submit_feedback(feedback: Feedback):
+    feedbacks.append(feedback)
+    
+    return {"message": f"Feedback received. Thank you, {feedback.name}."}
